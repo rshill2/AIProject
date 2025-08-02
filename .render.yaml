@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: n8n
+    env: docker
+    repo: https://github.com/YOUR_USERNAME/n8n.git
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: true
+      - key: N8N_BASIC_AUTH_USER
+        value: admin
+      - key: N8N_BASIC_AUTH_PASSWORD
+        value: YOUR_SECURE_PASSWORD
+      - key: WEBHOOK_URL
+        value: https://your-service-name.onrender.com/
+    disk:
+      name: n8n-data
+      mountPath: /data
+      sizeGB: 1
+databases:
+  - name: n8n-db
+    databaseName: n8n
+    user: n8n
